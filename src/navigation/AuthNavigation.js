@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {SignedInStack, SignedOutStack} from './NavigationStack';
 
 const AuthNavigation = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const userHandler = user =>
     user ? setIsLoggedIn(true) : setIsLoggedIn(false);

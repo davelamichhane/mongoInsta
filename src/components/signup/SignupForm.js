@@ -12,11 +12,27 @@ import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Validator from 'email-validator';
+import {Auth} from 'aws-amplify';
 
 const getRandomProfilePicture = async () => {
   const response = await fetch('https://randomuser.me/api');
   const data = await response.json();
   return data.results[0].picture.large;
+};
+
+const onSignup = async (email, username, password) => {
+  try {
+    const {user} = await Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email,
+      },
+    });
+    console.log(user);
+  } catch (error) {
+    console.log('error signing up:', error);
+  }
 };
 
 const SignupForm = () => {
@@ -30,15 +46,6 @@ const SignupForm = () => {
       .required()
       .min(8, 'Your password needs to be 8 characters'),
   });
-
-  // What happens during signup
-  const onSignup = async (email, password, username) => {
-    try {
-      //mongodb signup
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
 
   return (
     <View style={styles.wrapper}>
