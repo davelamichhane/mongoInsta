@@ -1,6 +1,6 @@
 {
   "auth": {
-    "mongoinsta8008b23d": {
+    "mongoinsta3e8fe670": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -16,9 +16,7 @@
           "EMAIL"
         ],
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]

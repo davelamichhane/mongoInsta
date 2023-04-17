@@ -10,22 +10,25 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import Validator from 'email-validator';
-import { auth } from '../../firebase';
+import {Auth} from 'aws-amplify';
+import {useContext} from 'react';
+import { UserContext } from '../../navigation/AuthNavigation';
 
 const LoginForm = () => {
   const navigation = useNavigation();
+  const setIsLoggedIn = useContext(UserContext);
 
   const loginFormSchema = Yup.object().shape({
-    email: Yup.string().email().required('An email is required'),
+    username: Yup.string().required('A username is required'),
     password: Yup.string()
       .required()
       .min(8, 'Your password needs to be 8 characters'),
   });
 
-  const onLogin = async (email, password) => {
+  const onLogin = async (username, password) => {
     try {
-      //mongodb login
+      await Auth.signIn(username, password);
+      setIsLoggedIn(true);
     } catch (error) {
       Alert.alert('Incorrect Username or Password', error.message, [
         {
@@ -43,8 +46,8 @@ const LoginForm = () => {
   return (
     <View style={styles.wrapper}>
       <Formik
-        initialValues={{email: '', password: ''}}
-        onSubmit={values => onLogin(values.email, values.password)}
+        initialValues={{username: '', password: ''}}
+        onSubmit={values => onLogin(values.username, values.password)}
         validationSchema={loginFormSchema}
         validateOnMount={true}>
         {({handleChange, handleBlur, handleSubmit, values, isValid}) => (
@@ -53,22 +56,19 @@ const LoginForm = () => {
               style={[
                 styles.inputField,
                 {
-                  borderColor:
-                    values.email.length < 1 || Validator.validate(values.email)
-                      ? '#ccc'
-                      : 'red',
+                  borderColor: values.username.length < 1 ? '#ccc' : 'red',
                 },
               ]}>
               <TextInput
                 placeholderTextColor="#444"
-                placeholder="Phone number, username or email"
+                placeholder="username"
                 autoCapitalize="none"
                 keyboardType="email-address"
                 textContentType="emailAddress"
                 autoFocus={true}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
+                onChangeText={handleChange('username')}
+                onBlur={handleBlur('username')}
+                value={values.username}
               />
             </View>
 

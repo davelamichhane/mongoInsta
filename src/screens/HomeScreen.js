@@ -5,12 +5,8 @@ import Post from '../components/home/Post';
 import Stories from '../components/home/Stories';
 import {POSTS} from '../data/POSTS';
 import BottomTabs from '../components/home/BottomTabs';
-import { useEffect } from 'react';
 
 const HomeScreen = () => {
-  useEffect(()=>{
-  
-  },[])
   return (
     <SafeAreaView style={styles.container}>
       <Header />

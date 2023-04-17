@@ -1,5 +1,5 @@
 import {
-  Alert,
+    Button,
   Pressable,
   StyleSheet,
   Text,
@@ -14,30 +14,7 @@ import * as Yup from 'yup';
 import Validator from 'email-validator';
 import {Auth} from 'aws-amplify';
 
-const getRandomProfilePicture = async () => {
-  const response = await fetch('https://randomuser.me/api');
-  const data = await response.json();
-  return data.results[0].picture.large;
-};
-
-const onSignup = async (email, username, password) => {
-  try {
-    const {user} = await Auth.signUp({
-      username,
-      password,
-      attributes: {
-        email,
-      },
-    });
-    console.log(user);
-  } catch (error) {
-    console.log('error signing up:', error);
-  }
-};
-
 const SignupForm = () => {
-  const navigation = useNavigation();
-
   // Schema for signup form
   const signupFormSchema = Yup.object().shape({
     email: Yup.string().email().required('An email is required'),
@@ -47,12 +24,28 @@ const SignupForm = () => {
       .min(8, 'Your password needs to be 8 characters'),
   });
 
+  const navigation = useNavigation();
+
+  const onSignup = async (email, username, password) => {
+    try {
+      await Auth.signUp({
+        username,
+        password,
+        attributes: {email},
+        autoSignIn: {enabled: true},
+      });
+      navigation.navigate('EmailVerification', {email, password,username})
+    } catch (error) {
+      console.log('error signing up:', error);
+    }
+  };
+
   return (
     <View style={styles.wrapper}>
       <Formik
         initialValues={{email: '', username: '', password: ''}}
         onSubmit={values =>
-          onSignup(values.email, values.password, values.username)
+          onSignup(values.email, values.username, values.password)
         }
         validationSchema={signupFormSchema}
         validateOnMount={true}>
@@ -130,12 +123,10 @@ const SignupForm = () => {
               />
             </View>
 
-            <Pressable
-              titleSize={20}
+            <Button
               style={styles.button(isValid)}
-              onPress={handleSubmit}>
-              <Text style={styles.buttonText}>Sign Up</Text>
-            </Pressable>
+              onPress={handleSubmit}
+              title='Sign Up' />
 
             <View style={styles.signupContainer}>
               <Text>Already have an account? </Text>

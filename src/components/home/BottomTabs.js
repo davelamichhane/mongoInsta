@@ -1,6 +1,6 @@
 import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {Divider, Image} from 'react-native-elements';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 
 const BottomTabs = ({icons}) => {
   const [activeTab, setActiveTab] = useState('Home');

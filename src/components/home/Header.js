@@ -1,4 +1,3 @@
-
 import {React} from '.react';
 import {
   View,
@@ -10,18 +9,26 @@ import {
   Button,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
-const handleSignout = async () => {
-  try {
-    // mongodb auth
-  } catch (err) {
-    Alert.alert(err.message);
-  }
-};
+import {launchImageLibrary} from 'react-native-image-picker';
+import {Auth} from 'aws-amplify';
+import {useContext} from 'react';
+import {UserContext} from '../../navigation/AuthNavigation';
 
 const Header = () => {
   const navigation = useNavigation();
+  const setIsLoggedIn = useContext(UserContext);
+  const handleSignout = async () => {
+    try {
+      const isAuthneticated = await Auth.currentAuthenticatedUser();
+      if (isAuthneticated) {
+        Auth.signOut();
+        setIsLoggedIn(false);
+      }
+    } catch (err) {
+      Alert.alert(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       {/* Instagram Logo */}
