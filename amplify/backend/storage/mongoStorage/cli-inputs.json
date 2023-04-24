@@ -1,0 +1,14 @@
+{
+  "resourceName": "mongoStorage",
+  "policyUUID": "425d8171",
+  "bucketName": "mongoinsta1eaf0e4947e4425c8b0e84f9881206be",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger6c8612cf",
+  "groupAccess": {}
+}
