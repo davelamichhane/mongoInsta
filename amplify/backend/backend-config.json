@@ -1,10 +1,25 @@
 {
   "api": {
     "mongoinsta": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "mongoinstaa96a5454"
+        }
+      ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authmongoinstaa96a5454"
+              }
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7
@@ -18,7 +33,7 @@
     }
   },
   "auth": {
-    "mongoinsta3e8fe670": {
+    "mongoinstaa96a5454": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -43,44 +58,9 @@
       "service": "Cognito"
     }
   },
-  "function": {
-    "S3Trigger6c8612cf": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda"
-    }
-  },
-  "parameters": {
-    "AMPLIFY_function_S3Trigger6c8612cf_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "S3Trigger6c8612cf"
-        }
-      ]
-    },
-    "AMPLIFY_function_S3Trigger6c8612cf_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "S3Trigger6c8612cf"
-        }
-      ]
-    }
-  },
   "storage": {
-    "mongoStorage": {
-      "dependsOn": [
-        {
-          "attributes": [
-            "Name",
-            "Arn",
-            "LambdaExecutionRole"
-          ],
-          "category": "function",
-          "resourceName": "S3Trigger6c8612cf"
-        }
-      ],
+    "mongoInstaStorage": {
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
     }

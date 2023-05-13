@@ -1,4 +1,4 @@
-import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import {Divider, Image} from 'react-native-elements';
 import {useState} from 'react';
 

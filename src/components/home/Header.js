@@ -6,7 +6,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
-  Button,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -45,7 +44,7 @@ const Header = () => {
           onPress={async () => {
             try {
               const result = await launchImageLibrary({mediaType: 'photo'});
-              const imageUri = result.assets[0].uri;
+              const imageUri = result.assets[0].uri
               navigation.navigate('NewPost', {imageUri});
             } catch (error) {
               console.log(error);

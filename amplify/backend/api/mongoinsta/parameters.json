@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "mongoinsta",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authmongoinstaa96a5454",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

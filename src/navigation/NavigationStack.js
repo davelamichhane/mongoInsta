@@ -4,6 +4,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import EmailVerification from '../screens/EmailVerificationScreen';
+import UpdateProfileScreen from '../screens/UpdateProfileScreen';
+import Temp from '../screens/Temp';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Stack = createNativeStackNavigator();
 const screenOptions = {
@@ -13,10 +16,13 @@ const screenOptions = {
 export const SignedInStack = () => {
   return (
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Profile"
         screenOptions={screenOptions}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="NewPost" component={NewPostScreen} />
+        <Stack.Screen name="UpdateProfile" component={UpdateProfileScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Temp" component={Temp} />
       </Stack.Navigator>
   );
 };

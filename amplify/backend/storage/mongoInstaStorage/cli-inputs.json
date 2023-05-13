@@ -1,0 +1,13 @@
+{
+  "resourceName": "mongoInstaStorage",
+  "policyUUID": "5b0b67b9",
+  "bucketName": "mongoinsta3b17f212f276466ea2fff37644f77acd",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "groupAccess": {}
+}
